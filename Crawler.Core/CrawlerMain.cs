@@ -27,20 +27,27 @@ namespace Crawler.Core
         public dynamic GetDetail(Uri detailUrl)
         {
             var page = this.pageRetriver.LoadPage(detailUrl);
-            var specialities = page.DocumentNode.SelectSingleNode("/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='address'][1]/li[1]/ul/li[1]/a").InnerText;
-            var name = page.DocumentNode.SelectSingleNode("/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/h1").InnerText;
-            var practiceName = page.DocumentNode.SelectSingleNode("/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='doc-specialties']/li[1]/ul/li/a").InnerText;
-            var address = page.DocumentNode.SelectSingleNode("/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='address']").InnerText;
-            var rate = page.DocumentNode.SelectSingleNode("/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='doc-ratings']/li[@class='not-rated']").InnerText;
+
+            var specialities = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='address'][1]/li[1]/ul/li[1]/a");
+            var name = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/h1");
+            var practiceName = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='doc-specialties']/li[1]/ul/li/a");
+            var address = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='address']");
+            var rate = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='doc-ratings']/li[@class='not-rated']");
 
             return new
             {
                 Name = name,
                 PracticeName = practiceName,
-                //Specialities = specialities,
+                Specialities = specialities,
                 Address = address,
                 Rate = rate
             };
+        }
+
+        private string TryGetToken(HtmlAgilityPack.HtmlDocument page, string xpath)
+        {
+            var element = page.DocumentNode.SelectSingleNode(xpath);
+            return element == null ? "" : element.InnerText;
         }
     }
 }
