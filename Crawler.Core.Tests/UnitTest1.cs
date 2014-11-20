@@ -10,7 +10,12 @@ namespace Crawler.Core.Tests
         public void TestMethod1()
         {
             var main = new Crawler.Core.CrawlerMain();
-            main.GetRootPage();
+            foreach (var link in main.GetRootPage())
+            {
+                Console.WriteLine(link);
+            }
+
+
         }
     }
 }

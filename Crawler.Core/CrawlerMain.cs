@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Net;
 namespace Crawler.Core
 {
@@ -8,20 +9,13 @@ namespace Crawler.Core
 
         public CrawlerMain()
         {
-            
+
         }
 
-        public void GetRootPage()
+        public IEnumerable<string> GetRootPage()
         {
-            foreach(var page in WebPage.GetAllPagesUnder(new Uri("http://ae.doctoruna.com/en/doctors/a"))){
-                Console.WriteLine( page.Url);
-            }
-            
-            
-            
+            var page  = WebPage.LoadPage(new Uri("http://ae.doctoruna.com/en/doctors/a"));
+            return WebPage.GetMainLinks(page);
         }
-
     }
-
-
 }

@@ -7,20 +7,33 @@ using System.Net;
 
 namespace Crawler.Core
 {
-    /// <summary>
-    /// A result encapsulating the Url and the HtmlDocument
-    /// </summary>
     public abstract class WebPage
     {
         public Uri Url { get; set; }
 
-        /// <summary>
-        /// Get every WebPage.Internal on a web site (or part of a web site) visiting all internal links just once
-        /// plus every external page (or other Url) linked to the web site as a WebPage.External
-        /// </summary>
-        /// <remarks>
-        /// Use .OfType WebPage.Internal to get just the internal ones if that's what you want
-        /// </remarks>
+
+        public static HtmlDocument LoadPage(Uri url)
+        {
+            HttpWebRequest oReq = (HttpWebRequest)WebRequest.Create(url);
+            oReq.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5";
+
+            HttpWebResponse resp = (HttpWebResponse)oReq.GetResponse();
+            HtmlDocument doc = new HtmlDocument();
+            var resultStream = resp.GetResponseStream();
+            doc.Load(resultStream);
+            return doc;
+        }
+
+        public static IEnumerable<string> GetMainLinks(HtmlDocument doc)
+        {
+            var nodes = doc.DocumentNode.SelectNodes("//div[@class='findlist byname']/ul[@class='clearfix']/li/a");
+            foreach (var node in nodes)
+            {
+                var href = node.GetAttributeValue("href", "");
+                yield return href;
+            }
+        }
+        
         public static IEnumerable<WebPage> GetAllPagesUnder(Uri urlRoot)
         {
             var queue = new Queue<Uri>();
@@ -96,40 +109,18 @@ namespace Crawler.Core
             }
         }
 
-        ///// <summary>
-        ///// In the future might provide all the images too??
-        ///// </summary>
-        //public class Image : WebPage
-        //{
-        //}
-
-        /// <summary>
-        /// Error loading page
-        /// </summary>
         public class Error : WebPage
         {
             public int HttpResult { get; set; }
             public Exception Exception { get; set; }
         }
 
-        /// <summary>
-        /// External page - not followed
-        /// </summary>
-        /// <remarks>
-        /// No body - go load it yourself
-        /// </remarks>
         public class External : WebPage
         {
         }
 
-        /// <summary>
-        /// Internal page
-        /// </summary>
         public class Internal : WebPage
         {
-            /// <summary>
-            /// For internal pages we load the document for you
-            /// </summary>
             public virtual HtmlDocument HtmlDocument { get; internal set; }
         }
     }
