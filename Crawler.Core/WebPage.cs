@@ -10,12 +10,6 @@ namespace Crawler.Core
     public abstract class WebPage
     {
         public Uri Url { get; set; }
-// some xpaths to retrive detail information
-//doc-portrait foto
-//doc-info clearfix => caja de info
-//ul .doc-specialties especialidades
-//ul .address => address
-//ul .doc-ratings
 
 
         public static IEnumerable<string> GetMainLinks(HtmlDocument doc)
@@ -29,6 +23,19 @@ namespace Crawler.Core
             }
 
             return links;
+        }
+
+        public static HtmlNode GetDetail(HtmlNode detailNode)
+        {
+            
+            // some xpaths to retrive detail information
+            //doc-portrait foto
+            //doc-info clearfix => caja de info
+            //ul .doc-specialties especialidades
+            //ul .address => address
+            //ul .doc-ratings
+
+            return null;
         }
         
         public static IEnumerable<WebPage> GetAllPagesUnder(Uri urlRoot)
