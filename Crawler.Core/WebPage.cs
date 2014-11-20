@@ -10,28 +10,25 @@ namespace Crawler.Core
     public abstract class WebPage
     {
         public Uri Url { get; set; }
+// some xpaths to retrive detail information
+//doc-portrait foto
+//doc-info clearfix => caja de info
+//ul .doc-specialties especialidades
+//ul .address => address
+//ul .doc-ratings
 
-
-        public static HtmlDocument LoadPage(Uri url)
-        {
-            HttpWebRequest oReq = (HttpWebRequest)WebRequest.Create(url);
-            oReq.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5";
-
-            HttpWebResponse resp = (HttpWebResponse)oReq.GetResponse();
-            HtmlDocument doc = new HtmlDocument();
-            var resultStream = resp.GetResponseStream();
-            doc.Load(resultStream);
-            return doc;
-        }
 
         public static IEnumerable<string> GetMainLinks(HtmlDocument doc)
         {
             var nodes = doc.DocumentNode.SelectNodes("//div[@class='findlist byname']/ul[@class='clearfix']/li/a");
+            var links = new List<string>();
             foreach (var node in nodes)
             {
                 var href = node.GetAttributeValue("href", "");
-                yield return href;
+                links.Add(href);
             }
+
+            return links;
         }
         
         public static IEnumerable<WebPage> GetAllPagesUnder(Uri urlRoot)

@@ -6,15 +6,21 @@ namespace Crawler.Core
 {
     public class CrawlerMain
     {
+        IPageRetriever pageRetriver;
 
         public CrawlerMain()
         {
-
+            this.pageRetriver = new PageRetriever();
         }
 
-        public IEnumerable<string> GetRootPage()
+        public CrawlerMain(IPageRetriever pageRetriver)
         {
-            var page  = WebPage.LoadPage(new Uri("http://ae.doctoruna.com/en/doctors/a"));
+            this.pageRetriver = pageRetriver;
+        }
+
+        public IEnumerable<string> GetDetailLinks()
+        {
+            var page  = this.pageRetriver.LoadPage(new Uri("http://ae.doctoruna.com/en/doctors/a"));
             return WebPage.GetMainLinks(page);
         }
     }
