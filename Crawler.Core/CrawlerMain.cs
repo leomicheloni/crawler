@@ -24,7 +24,7 @@ namespace Crawler.Core
             return WebPage.GetMainLinks(page);
         }
 
-        public dynamic GetDetail(Uri detailUrl)
+        public DoctorInfo GetDetail(Uri detailUrl)
         {
             var page = this.pageRetriver.LoadPage(detailUrl);
 
@@ -34,7 +34,7 @@ namespace Crawler.Core
             var address = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='address']");
             var rate = TryGetToken(page, "/html[@class='ltr']/body/div[@class='wrap']/div[@id='wrapsite']/div[@class='container content with-breadcrumbs clearfix']/div[@class='doc-profile clearfix']/div[@class='doc-info clearfix']/ul[@class='doc-ratings']/li[@class='not-rated']");
 
-            return new
+            return new DoctorInfo
             {
                 Name = name,
                 PracticeName = practiceName,

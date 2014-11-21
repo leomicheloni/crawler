@@ -41,8 +41,7 @@ namespace Crawler.Core.Tests
             var main = new Crawler.Core.CrawlerMain(mockedRetriver.Object);
             var doctorInfo = main.GetDetail(new Uri("http://something.com")) ;
 
-            
+            Assert.AreEqual(doctorInfo.Name, "Andre Heynes BSc");
         }
-
     }
 }

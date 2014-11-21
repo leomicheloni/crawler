@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrawlerMain.cs" />
+    <Compile Include="DoctorInfo.cs" />
     <Compile Include="IPageRetriever.cs" />
     <Compile Include="PageRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
