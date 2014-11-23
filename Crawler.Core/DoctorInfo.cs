@@ -10,8 +10,9 @@ namespace Crawler.Core
     {
         public string Name { get; set; }
         public string PracticeName { get; set; }
-        public string Specialities { get; set; }
+        public IEnumerable<string> Specialities { get; set; }
         public string Address { get; set; }
         public string Rate { get; set; }
+        public string Image { get; set; }
     }
 }

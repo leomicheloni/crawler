@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="page samples\detail.html" />
     <Content Include="page samples\alphabetical_a.html" />
+    <Content Include="page samples\detail_multiple_specialities.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
