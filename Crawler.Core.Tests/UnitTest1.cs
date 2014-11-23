@@ -16,6 +16,13 @@ namespace Crawler.Core.Tests
     public class UnitTest1
     {
         [TestMethod]
+        public void CrawlAll()
+        {
+            var main = new Crawler.Core.CrawlerMain();
+            main.CrawlAll();
+        }
+
+        [TestMethod]
         public void GetLinks()
         {
             var mockedRetriver = new Moq.Mock<IPageRetriever>();

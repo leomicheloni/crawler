@@ -18,9 +18,22 @@ namespace Crawler.Core
             this.pageRetriver = pageRetriver;
         }
 
+        public void CrawlAll()
+        {
+            var doctors = new List<DoctorInfo>();
+
+            //page a for now
+            var links = this.GetDetailLinks();
+            foreach (var link in links)
+            {
+                doctors.Add(this.GetDetail(new Uri(link)));
+            }
+
+        }
+        
         public IEnumerable<string> GetDetailLinks()
         {
-            var page  = this.pageRetriver.LoadPage(new Uri("http://ae.doctoruna.com/en/doctors/a"));
+            var page  = this.pageRetriver.LoadPage(new Uri("http://ae.doctoruna.com/en/doctors/Z"));
             return WebPage.GetMainLinks(page);
         }
 
@@ -72,7 +85,9 @@ namespace Crawler.Core
 
         private string TryGetToken(HtmlAgilityPack.HtmlDocument page, string xpath, string attributeName)
         {
-            return page.DocumentNode.SelectSingleNode(xpath).GetAttributeValue(attributeName,"");
+            var node = page.DocumentNode.SelectSingleNode(xpath);
+            if(node == null) return "";
+            return node.GetAttributeValue(attributeName,"");
         }
 
     }
