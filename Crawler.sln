@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Core", "Crawler.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Core.Tests", "Crawler.Core.Tests\Crawler.Core.Tests.csproj", "{4AB33C57-37A3-41C0-A82C-D7A30EB0E208}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Entities", "Crawler.Entities\Crawler.Entities.csproj", "{2675DC50-3701-441E-87B5-86B0BD8326EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.DataAccess", "Crawler.DataAccess\Crawler.DataAccess.csproj", "{938AD3D0-87C6-427D-A0A3-EE99F2BD6AD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4AB33C57-37A3-41C0-A82C-D7A30EB0E208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AB33C57-37A3-41C0-A82C-D7A30EB0E208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AB33C57-37A3-41C0-A82C-D7A30EB0E208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2675DC50-3701-441E-87B5-86B0BD8326EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2675DC50-3701-441E-87B5-86B0BD8326EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2675DC50-3701-441E-87B5-86B0BD8326EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2675DC50-3701-441E-87B5-86B0BD8326EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{938AD3D0-87C6-427D-A0A3-EE99F2BD6AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{938AD3D0-87C6-427D-A0A3-EE99F2BD6AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{938AD3D0-87C6-427D-A0A3-EE99F2BD6AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{938AD3D0-87C6-427D-A0A3-EE99F2BD6AD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

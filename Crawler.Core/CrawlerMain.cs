@@ -1,4 +1,5 @@
 ﻿
+using Crawler.Entities;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -21,13 +22,16 @@ namespace Crawler.Core
         public void CrawlAll()
         {
             var doctors = new List<DoctorInfo>();
-
+            var repo = new DataAccess.DataAccessFactory().Build();
             //page a for now
             var links = this.GetDetailLinks();
             foreach (var link in links)
             {
                 doctors.Add(this.GetDetail(new Uri(link)));
+                
             }
+
+            repo.SaveAll(doctors);
 
         }
         
@@ -71,6 +75,7 @@ namespace Crawler.Core
         private IEnumerable<string> TryGetTokenMultiple(HtmlAgilityPack.HtmlDocument page, string xpath)
         {
             var elements = page.DocumentNode.SelectNodes(xpath);
+            if (elements == null) yield break;
             foreach (var element in elements)
             {
                 yield return element == null ? "" : element.InnerText;

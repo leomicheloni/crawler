@@ -66,6 +66,10 @@
       <Project>{6351d691-0699-4c9d-9fe3-9d2680cb7ca7}</Project>
       <Name>Crawler.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Crawler.Entities\Crawler.Entities.csproj">
+      <Project>{2675dc50-3701-441e-87b5-86b0bd8326eb}</Project>
+      <Name>Crawler.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="page samples\detail.html" />
