@@ -18,7 +18,7 @@ namespace Crawler.Entities
         public override string ToString()
         {
             var specialities = String.Join(", ", this.Specialities);
-            return this.Name + " " + this.PracticeName + " " + this.Address + " " + this.Image + " " + specialities;
+            return this.Name + Environment.NewLine + this.PracticeName + Environment.NewLine + this.Address + Environment.NewLine + this.Image + Environment.NewLine + specialities;
         }
    }
 }

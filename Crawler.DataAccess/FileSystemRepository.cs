@@ -16,8 +16,8 @@ namespace Crawler.DataAccess
             var builder = new StringBuilder();
             foreach (var item in list)
             {
-                builder.Append(item.ToString());
-                builder.Append("=====================");
+                builder.AppendLine(item.ToString());
+                builder.AppendLine("=====================");
             }
 
             File.WriteAllText(path, builder.ToString());
